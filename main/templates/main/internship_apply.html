@@ -1,0 +1,166 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Internship Application{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container page-header-content">
+        <h1 class="section-title">
+            Internship <span>Application</span>
+        </h1>
+        <p style="color:var(--text-muted)">
+            Apply for internship at Nebula Geo Technologies.
+        </p>
+    </div>
+</section>
+
+<section class="section-dark py-5">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+
+                <div class="contact-form-wrap">
+
+                    <h3 style="color:white;margin-bottom:20px;">
+                        Apply Now
+                    </h3>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text"
+                                       name="name"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email"
+                                       name="email"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Phone Number</label>
+                                <input type="text"
+                                       name="phone"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">College Name</label>
+                                <input type="text"
+                                       name="college"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <input type="text"
+                                       name="department"
+                                       class="form-control"
+                                       required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Current Year</label>
+                                <input type="text"
+                                       name="year"
+                                       class="form-control"
+                                       placeholder="1st Year / 2nd Year / Final Year"
+                                       required>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">
+                                    Internship Program
+                                </label>
+
+                                <select name="internship_program"
+                                        class="form-select"
+                                        required>
+
+                                    <option value="">
+                                        Select Program
+                                    </option>
+
+                                    <option value="Web Development">
+                                        Web Development
+                                    </option>
+
+                                    <option value="React Frontend">
+                                        React Frontend
+                                    </option>
+
+                                    <option value="Django Backend">
+                                        Django Backend
+                                    </option>
+
+                                    <option value="Mobile App Development">
+                                        Mobile App Development
+                                    </option>
+
+                                    <option value="UI/UX Design">
+                                        UI/UX Design
+                                    </option>
+
+                                    <option value="Full Stack Development">
+                                        Full Stack Development
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Skills</label>
+
+                                <textarea name="skills"
+                                          rows="3"
+                                          class="form-control"
+                                          placeholder="Python, Django, HTML, CSS, JavaScript"></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">
+                                    Why do you want this internship?
+                                </label>
+
+                                <textarea name="message"
+                                          rows="5"
+                                          class="form-control"></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit"
+                                        class="btn-nebula w-100">
+
+                                    <i class="fas fa-paper-plane"></i>
+                                    Submit Application
+
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

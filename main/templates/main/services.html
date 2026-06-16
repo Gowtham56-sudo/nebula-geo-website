@@ -1,0 +1,183 @@
+{% extends 'main/base.html' %}
+{% block title %}Services — Nebula Geo Technologies{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div class="container page-header-content">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Services</li>
+      </ol>
+    </nav>
+    <h1 class="section-title mt-2">Our <span>Services</span></h1>
+    <p style="color:var(--text-muted);max-width:500px">End-to-end IT solutions crafted to accelerate your business
+      growth.</p>
+  </div>
+</section>
+
+<section class="section-dark py-5" style="padding:5rem 0">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-badge">What We Offer</div>
+      <h2 class="section-title">Comprehensive <span>IT Solutions</span></h2>
+      <p class="section-subtitle">From websites to enterprise software — we have the expertise to deliver exceptional
+        results.</p>
+    </div>
+    <div class="row g-4">
+      {% if services %}
+      {% for svc in services %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas {{ svc.icon }}"></i></div>
+          <h4>{{ svc.title }}</h4>
+          <p>{{ svc.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-globe"></i></div>
+          <h4>Website Development</h4>
+          <p>Professional, responsive websites built with modern HTML5, CSS3, and JavaScript. SEO-optimized,
+            fast-loading, and mobile-first for every screen size.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-code"></i></div>
+          <h4>Web Application Development</h4>
+          <p>Custom web applications with Django backends and React frontends. User authentication, dashboards, REST
+            APIs, and advanced business logic.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-laptop-code"></i></div>
+          <h4>Software Development</h4>
+          <p>Desktop software, enterprise tools, automation scripts, and ERP-style systems tailored to your business
+            workflow.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h4>Mobile App Development</h4>
+          <p>Cross-platform iOS and Android applications built with React Native — smooth performance, native feel,
+            single codebase.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-shopping-cart"></i></div>
+          <h4>E-Commerce Development</h4>
+          <p>Complete e-commerce platforms with product catalogs, secure checkout, Razorpay/Stripe integration, and
+            powerful admin panels.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-paint-brush"></i></div>
+          <h4>UI/UX Design</h4>
+          <p>Figma wireframes, user journey mapping, interactive prototypes, and final pixel-perfect UI kits. Beautiful,
+            functional, and user-tested.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-user-graduate"></i></div>
+          <h4>Final Year Projects</h4>
+          <p>Complete BE, BTech, MCA, MSc and Diploma final year projects with source code, documentation and deployment
+            support.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-project-diagram"></i></div>
+          <h4>Mini & Mega Projects</h4>
+          <p>Innovative mini and mega projects with real-time implementation, reports and technical assistance.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h4>Project Guidance</h4>
+          <p>Expert mentoring for project selection, coding, documentation, presentation and viva preparation.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-cogs"></i></div>
+          <h4>Custom Project Development</h4>
+          <p>Custom software, websites, mobile apps and automation solutions developed based on client requirements.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-cloud"></i></div>
+          <h4>Django Development</h4>
+          <p>Expert Django development — MVT architecture, Django REST Framework, Celery for tasks, and
+            PostgreSQL/SQLite databases.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fab fa-react"></i></div>
+          <h4>React Frontend Development</h4>
+          <p>Modern React.js SPAs with hooks, context API, Redux, and seamless Django/Node.js backend integration.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="service-card">
+          <div class="svc-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h4>Internship Programs</h4>
+          <p>Structured internship programs with real-world project experience, mentorship, and certificates. <a
+              href="{% url 'internship' %}" style="color:var(--accent)">Learn more →</a></p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% if internships %}
+<section class="section-dark py-5" style="padding:4rem 0">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-badge">Training & Internship</div>
+      <h2 class="section-title">Internship <span>Programs</span></h2>
+    </div>
+    <div class="row g-4">
+      {% for prog in internships %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <h5 style="color:var(--white);margin-bottom:.7rem">{{ prog.title }}</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem">{{ prog.description }}</p>
+          <div class="intern-meta mb-3">
+            <span><i class="fas fa-clock"></i>{{ prog.duration }}</span>
+            <span><i class="fas fa-rupee-sign"></i>{{ prog.stipend }}</span>
+          </div>
+          <div>{% for skill in prog.get_skills_list %}<span class="tech-tag">{{ skill }}</span>{% endfor %}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4 reveal"><a href="{% url 'internship' %}" class="btn-nebula"><i
+          class="fas fa-graduation-cap"></i>Apply Now</a></div>
+  </div>
+</section>
+{% endif %}
+
+<section
+  style="padding:4rem 0;background:linear-gradient(135deg,rgba(0,87,255,.1),rgba(123,97,255,.06));border-top:1px solid rgba(0,87,255,.1)">
+  <div class="container text-center reveal">
+    <h2 class="section-title">Have a Project in Mind?</h2>
+    <p class="section-subtitle">Let's discuss your requirements and build something exceptional together.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="{% url 'contact' %}" class="btn-nebula"><i class="fas fa-comments"></i>Get Free Consultation</a>
+      <a href="https://wa.me/919952315483" target="_blank" class="btn-outline-nebula"><i
+          class="fab fa-whatsapp"></i>WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,240 @@
+{% extends 'main/base.html' %}
+{% block title %}Portfolio — Nebula Geo Technologies{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div class="container page-header-content">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Portfolio</li>
+      </ol>
+    </nav>
+    <h1 class="section-title mt-2">Our <span>Portfolio</span></h1>
+    <p style="color:var(--text-muted);max-width:500px">Real projects, real results — showcasing work we're proud of.</p>
+  </div>
+</section>
+
+<section class="section-dark py-5" style="padding:5rem 0">
+  <div class="container">
+    <!-- Filters -->
+    <div class="filter-tabs reveal">
+      <a href="{% url 'portfolio' %}" class="filter-btn {% if active_category == 'all' %}active{% endif %}"
+        data-cat="all">All Projects</a>
+      {% for val, label in categories %}
+      <a href="{% url 'portfolio' %}?category={{ val }}"
+        class="filter-btn {% if active_category == val %}active{% endif %}" data-cat="{{ val }}">{{ label }}</a>
+      {% endfor %}
+    </div>
+
+    {% if projects %}
+    <div class="row g-4" id="portfolio-grid">
+      {% for project in projects %}
+      <div class="col-md-6 col-lg-4 port-item reveal" data-cat="{{ project.category }}">
+        <div class="portfolio-card">
+          <div class="port-img">
+            {% if project.image_url %}<img src="{{ project.image_url }}" alt="{{ project.title }}" loading="lazy">
+            {% else %}<div class="port-ph"><i
+                class="fas fa-{% if project.category == 'ecommerce' %}shopping-cart{% elif project.category == 'mobile' %}mobile-alt{% elif project.category == 'design' %}paint-brush{% else %}code{% endif %}"></i>
+            </div>{% endif %}
+            <div class="port-overlay">
+              {% if project.project_url %}<a href="{{ project.project_url }}" target="_blank" class="btn-nebula"
+                style="padding:.5rem 1.2rem;font-size:.82rem"><i class="fas fa-external-link-alt"></i>Live Site</a>{%
+              else %}<span class="btn-nebula" style="padding:.5rem 1.2rem;font-size:.82rem;cursor:default"><i
+                  class="fas fa-eye"></i>View Project</span>{% endif %}
+            </div>
+          </div>
+          <div class="port-body">
+            <span class="port-cat">{{ project.get_category_display }}</span>
+            <h4>{{ project.title }}</h4>
+            <p>{{ project.description|truncatechars:100 }}</p>
+            <div>{% for tech in project.get_tech_list %}<span class="tech-tag">{{ tech }}</span>{% endfor %}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+
+    <div class="row g-4" id="portfolio-grid">
+
+      <div class="row g-4" id="portfolio-grid">
+
+  <!-- CartifyZone -->
+  <div class="col-md-6 col-lg-6 port-item reveal" data-cat="ecommerce">
+    <div class="portfolio-card">
+
+      <div class="port-img" style="background:linear-gradient(135deg,#071428,#0D1F3C)">
+        <div class="port-ph">
+          <i class="fas fa-shopping-cart"></i>
+        </div>
+
+        <div class="port-overlay">
+          <a href="https://nebulageotechnlogies.pythonanywhere.com"
+             target="_blank"
+             class="btn-nebula"
+             style="padding:.5rem 1.2rem;font-size:.82rem">
+            <i class="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="port-body">
+        <span class="port-cat">E-Commerce</span>
+
+        <h4>CartifyZone E-Commerce Platform</h4>
+
+       <p>
+Modern web development platform showcasing training,
+projects, portfolio works, internship opportunities,
+technology solutions and professional business services
+for students, startups and companies.
+</p>
+        <div>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">SQLite</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Spring Boot Studio -->
+  <div class="col-md-6 col-lg-6 port-item reveal" data-cat="web">
+    <div class="portfolio-card">
+
+      <div class="port-img" style="background:linear-gradient(135deg,#071428,#0D1F3C)">
+        <div class="port-ph">
+          <i class="fas fa-code"></i>
+        </div>
+
+        <div class="port-overlay">
+          <a href="https://springbootstudio.netlify.app/"
+             target="_blank"
+             class="btn-nebula"
+             style="padding:.5rem 1.2rem;font-size:.82rem">
+            <i class="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="port-body">
+        <span class="port-cat">Web Development</span>
+
+        <h4>Spring Boot Studio</h4>
+
+        <p>
+          Modern web development platform showcasing training,
+          projects and professional technology solutions.
+        </p>
+
+        <div>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Bootstrap</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dtronics -->
+  <div class="col-md-6 col-lg-6 port-item reveal" data-cat="software">
+    <div class="portfolio-card">
+
+      <div class="port-img" style="background:linear-gradient(135deg,#071428,#0D1F3C)">
+        <div class="port-ph">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+
+        <div class="port-overlay">
+          <a href="http://dtronicsfuturetechsolutions.dev/"
+             target="_blank"
+             class="btn-nebula"
+             style="padding:.5rem 1.2rem;font-size:.82rem">
+            <i class="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="port-body">
+        <span class="port-cat">Software</span>
+
+        <h4>Dtronics Future Tech Solutions</h4>
+
+        <p>
+          Corporate technology website designed to showcase
+          services, innovations and business solutions.
+        </p>
+
+        <div>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SP Sports Shop -->
+  <div class="col-md-6 col-lg-6 port-item reveal" data-cat="ecommerce">
+    <div class="portfolio-card">
+
+      <div class="port-img" style="background:linear-gradient(135deg,#071428,#0D1F3C)">
+        <div class="port-ph">
+          <i class="fas fa-basketball-ball"></i>
+        </div>
+
+        <div class="port-overlay">
+          <a href="https://sp-sports-shop.netlify.app/"
+             target="_blank"
+             class="btn-nebula"
+             style="padding:.5rem 1.2rem;font-size:.82rem">
+            <i class="fas fa-external-link-alt"></i>
+            Live Demo
+          </a>
+        </div>
+      </div>
+
+      <div class="port-body">
+        <span class="port-cat">E-Commerce</span>
+
+        <h4>SP Sports Shop</h4>
+
+        <p>
+          Online sports store with modern UI,
+          product catalog and responsive shopping experience.
+        </p>
+
+        <div>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+    {% endif %}
+
+  </div>
+</section>
+
+<section style="padding:4rem 0;background:var(--dark2);border-top:1px solid rgba(0,87,255,.1)">
+  <div class="container text-center reveal">
+    <h2 class="section-title">Have a Project Idea?</h2>
+    <p class="section-subtitle">Let's make it your next success story.</p>
+    <a href="{% url 'contact' %}" class="btn-nebula"><i class="fas fa-rocket"></i>Start Your Project</a>
+  </div>
+</section>
+{% endblock %}

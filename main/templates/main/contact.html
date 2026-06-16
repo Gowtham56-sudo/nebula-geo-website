@@ -1,0 +1,220 @@
+{% extends 'main/base.html' %}
+{% block title %}Contact Us — Nebula Geo Technologies{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div class="container page-header-content">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Contact</li>
+      </ol>
+    </nav>
+    <h1 class="section-title mt-2">Get In <span>Touch</span></h1>
+    <p style="color:var(--text-muted);max-width:480px">Ready to start your project? We're one message away.</p>
+  </div>
+</section>
+
+<section class="section-dark py-5" style="padding:5rem 0">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Contact Info -->
+      <div class="col-lg-4">
+        <div class="reveal mb-4">
+          <div class="section-badge">Contact Details</div>
+          <h3 style="color:var(--white);font-family:var(--font-h);font-weight:700;margin-bottom:.5rem">Let's Talk</h3>
+          <p style="color:var(--text-muted);font-size:.88rem;line-height:1.8">Reach out via phone, email, or walk in to
+            our office in Bhavani. We respond within 24 hours.</p>
+        </div>
+        <div class="reveal">
+          <div class="ci-card">
+            <div class="ci-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="ci-label">Phone / WhatsApp</div>
+              <div class="ci-value"><a href="tel:++91 9952315483" style="color:inherit">+91 9952315483</a></div>
+            </div>
+          </div>
+          <div class="ci-card">
+            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-value"><a href="mailto:info@nebulageo.com" style="color:inherit">info@nebulageo.com</a>
+              </div>
+              <div class="ci-value"><a href="mailto:nebulageotechnologies@gmail.com" style="color:inherit">nebulageotechnologies@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="ci-card">
+            <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <div class="ci-label">Office Address</div>
+              <div class="ci-value" style="font-size:.82rem;line-height:1.5">SRS TOWER,Near Canara Bank
+
+                <br>Near New Bus Stand, Bhavani,<br>Tamil Nadu – 638301
+              </div>
+            </div>
+          </div>
+          <div class="ci-card">
+            <div class="ci-icon"><i class="fab fa-instagram"></i></div>
+            <div>
+              <div class="ci-label">Instagram</div>
+              <div class="ci-value"><a href="https://www.instagram.com/nebulageo_official" target="_blank"
+                  style="color:var(--accent)">@nebulageo_official</a></div>
+            </div>
+          </div>
+          <div class="ci-card">
+            <div class="ci-icon"><i class="fab fa-linkedin"></i></div>
+            <div>
+              <div class="ci-label">LinkedIn</div>
+              <div class="ci-value"><a href="https://www.linkedin.com/company/nebula-geo-technologies" target="_blank"
+                  style="color:var(--accent)">Nebula Geo Technologies</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-lg-8 reveal">
+        <div class="contact-form-wrap">
+          <h3 style="color:var(--white);font-family:var(--font-h);margin-bottom:.4rem">Send Us a Message</h3>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1.8rem">Fill in your details and we'll get
+            back to you within 24 hours.</p>
+          {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success mb-3">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form id="contactForm" method="POST" action="{% url 'contact' %}">
+    {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Full Name *</label>
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email Address *</label>
+                <input type="email" name="email" class="form-control" placeholder="you@example.com" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" name="phone" class="form-control" placeholder="++91 9952315483">
+              </div>
+              <div class=" col-md-6">
+                <label class="form-label">Service Interested In</label>
+                <select name="service_interested" class="form-select">
+                  <option value="">Select a Service</option>
+
+                  {% if services %}
+                  {% for svc in services %}
+                  <option value="{{ svc.title }}">{{ svc.title }}</option>
+                  {% endfor %}
+                  {% else %}
+                  <option value="Website Development">Website Development</option>
+                  <option value="Web Application Development">Web Application Development</option>
+                  <option value="Software Development">Software Development</option>
+                  <option value="Mobile App Development">Mobile App Development</option>
+                  <option value="E-Commerce Solutions">E-Commerce Solutions</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
+                  <option value="Internship Program">Internship Program</option>
+                  <option value="Other">Other</option>
+                  {% endif %}
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Subject *</label>
+                <input type="text" name="subject" class="form-control"
+                  placeholder="Project Discussion / Internship Inquiry / General Query" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message *</label>
+                <textarea name="message" class="form-control" rows="5"
+                  placeholder="Tell us about your project, requirements, and budget..." required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" id="submitBtn" class="btn-nebula w-100" style="justify-content:center"><i
+                    class="fas fa-paper-plane"></i>Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EmailJS Integration -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function() {
+      // REPLACE 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+      emailjs.init("iptgwpZQKyac8Gw02");
+  })();
+
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const btn = document.getElementById('submitBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      btn.disabled = true;
+
+      // REPLACE 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS IDs
+      emailjs.sendForm('service_ok3ooc7', 'template_2tml64j', this)
+          .then(function() {
+              console.log('Email sent successfully via EmailJS!');
+              // Proceed with standard form submission to save to Django Database
+              HTMLFormElement.prototype.submit.call(document.getElementById('contactForm'));
+          }, function(error) {
+              console.log('EmailJS FAILED...', error);
+              alert('Failed to send email. Please try again later.');
+              btn.innerHTML = originalText;
+              btn.disabled = false;
+          });
+  });
+</script>
+
+<!-- Quick Contact Bar -->
+<section style="padding:3rem 0;background:var(--dark2);border-top:1px solid rgba(0,87,255,.1)">
+  <div class="container">
+    <div class="row g-3 text-center justify-content-center">
+      <div class="col-md-4 reveal">
+        <a href="tel:+919952315483" class="ci-card justify-content-center text-decoration-none"
+          style="flex-direction:column;gap:.6rem;padding:1.5rem">
+          <div class="ci-icon mx-auto"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="ci-label text-center">Call Us</div>
+            <div class="ci-value">+91 9952315483</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 reveal">
+        <a href="https://wa.me/919952315483" target="_blank" class="ci-card justify-content-center text-decoration-none"
+          style="flex-direction:column;gap:.6rem;padding:1.5rem;border-color:rgba(37,211,102,.2)">
+          <div class="ci-icon mx-auto" style="background:rgba(37,211,102,.1);color:#25D366"><i
+              class="fab fa-whatsapp"></i></div>
+          <div>
+            <div class="ci-label text-center">WhatsApp</div>
+            <div class="ci-value">Chat Instantly</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 reveal">
+       <a href="mailto:info@nebulageo.com" class="ci-card justify-content-center text-decoration-none"
+style="flex-direction:column;gap:.5rem;padding: 1.rem">
+
+  <div class="ci-icon mx-auto"><i class="fas fa-envelope"></i></div>
+
+  <div>
+    <div class="ci-label text-center">Email Us</div>
+    <div class="ci-value">info@nebulageo.com</div>
+    <div class="ci-value">nebulageotechnologies@gmail.com</div>
+  </div>
+
+</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

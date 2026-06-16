@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% block title %}Terms & Conditions — Nebula Geo Technologies{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div class="container page-header-content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active">Terms & Conditions</li>
+            </ol>
+        </nav>
+        <h1 class="section-title mt-2">Terms & <span>Conditions</span></h1>
+    </div>
+</section>
+<section class="section-dark py-5" style="padding:5rem 0">
+    <div class="container">
+        <div class="col-lg-9 mx-auto reveal">
+            <div class="legal-content">
+                <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1.5rem">Last updated: January 2024</p>
+                <h3>1. Services</h3>
+                <p>Nebula Geo Technologies provides IT services including web development, software development, mobile
+                    app development, UI/UX design, and internship programs. All services are subject to a formal
+                    agreement and scope of work.</p>
+                <h3>2. Project Agreements</h3>
+                <p>All projects begin with a written proposal and agreement. Work commences only after written
+                    confirmation and advance payment as agreed.</p>
+                <h3>3. Intellectual Property</h3>
+                <p>Upon full payment, the client owns all custom code and designs developed for their project. Nebula
+                    Geo Technologies retains the right to showcase completed projects in our portfolio.</p>
+                <h3>4. Payments</h3>
+                <p>Payment terms are defined in each project agreement. Typically 50% advance, 50% on delivery. Delayed
+                    payments may result in project pauses.</p>
+                <h3>5. Revisions</h3>
+                <p>Each project includes a defined number of revision rounds. Additional revisions may be billed
+                    separately.</p>
+                <h3>6. Limitation of Liability</h3>
+                <p>Nebula Geo Technologies is not liable for indirect, incidental, or consequential damages arising from
+                    the use or inability to use our services.</p>
+                <h3>7. Contact</h3>
+                <p>For any questions, contact us at <a href="mailto:info@nebulageo.com"
+                        style="color:var(--accent)">info@nebulageo.com</a> or <a href="tel:+919952315483"
+                        style="color:var(--accent)">+91 9952315483</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

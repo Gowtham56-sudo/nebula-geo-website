@@ -1,0 +1,239 @@
+{% extends 'main/base.html' %}
+{% block title %}Internship Programs — Nebula Geo Technologies{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div class="container page-header-content">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="breadcrumb-item active">Internship</li>
+      </ol>
+    </nav>
+    <h1 class="section-title mt-2">Internship <span>Programs</span></h1>
+    <p style="color:var(--text-muted);max-width:520px">Launch your tech career with real-world project experience,
+      expert mentorship, and an industry-recognized certificate.</p>
+  </div>
+</section>
+
+<!-- Why Intern -->
+<section class="section-dark py-5" style="padding:5rem 0">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <div class="section-badge">Why Join Us</div>
+        <h2 class="section-title">Gain Real <span>Experience</span></h2>
+        <p style="color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;font-size:.95rem">At Nebula Geo
+          Technologies, internships aren't about making tea and attending meetings. You'll work on live client projects
+          alongside experienced developers, build real features, and leave with a portfolio you're proud of.</p>
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="ci-card" style="padding:1rem">
+              <div class="ci-icon"><i class="fas fa-laptop-code"></i></div>
+              <div>
+                <div class="ci-label">Training</div>
+                <div class="ci-value">Hands-on Projects</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ci-card" style="padding:1rem">
+              <div class="ci-icon"><i class="fas fa-certificate"></i></div>
+              <div>
+                <div class="ci-label">Credential</div>
+                <div class="ci-value">Certificate Issued</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ci-card" style="padding:1rem">
+              <div class="ci-icon"><i class="fas fa-user-tie"></i></div>
+              <div>
+                <div class="ci-label">Learning</div>
+                <div class="ci-value">Expert Mentors</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="ci-card" style="padding:1rem">
+              <div class="ci-icon"><i class="fas fa-briefcase"></i></div>
+              <div>
+                <div class="ci-label">Career</div>
+                <div class="ci-value">Job Assistance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="mission-card">
+          <h4 style="color:var(--white);margin-bottom:1.2rem"><i class="fas fa-star me-2"
+              style="color:var(--warning)"></i>What You'll Learn</h4>
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Full-stack web development with Django + React</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>REST API design and integration</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Database design with SQLite and PostgreSQL</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Version control with Git and GitHub</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Agile development and sprint planning</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Deployment on cloud platforms (AWS / DigitalOcean)</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>UI/UX best practices and responsive design</span>
+          </div>
+
+          <div class="d-flex align-items-start gap-2 mb-2">
+            <i class="fas fa-check-circle mt-1" style="color:var(--success)"></i>
+            <span>Mobile app development with React Native</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Programs -->
+<section class="section-dark2 py-5" style="padding:5rem 0">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-badge">Available Programs</div>
+      <h2 class="section-title">Choose Your <span>Track</span></h2>
+    </div>
+    <div class="row g-4">
+      {% if programs %}
+      {% for prog in programs %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <h5 style="color:var(--white);margin-bottom:.6rem">{{ prog.title }}</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">{{ prog.description }}
+          </p>
+          <div class="intern-meta mb-3">
+            <span><i class="fas fa-clock"></i>{{ prog.duration }}</span>
+            <span><i class="fas fa-rupee-sign"></i>{{ prog.stipend }}</span>
+          </div>
+          <div class="mb-3">{% for skill in prog.get_skills_list %}<span class="tech-tag">{{ skill }}</span>{% endfor %}
+          </div>
+          <a href="{% url 'internship_apply' %}" class="btn-nebula">
+    <i class="fas fa-paper-plane"></i>Apply Now
+</a>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fas fa-globe"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">Web Development Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">Build real websites
+            with HTML5, CSS3, Bootstrap, JavaScript, and Django. Learn full-stack development from the ground up.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>1–3 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">HTML/CSS</span><span class="tech-tag">JavaScript</span><span
+              class="tech-tag">Django</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fab fa-react"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">React Frontend Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">Master React.js —
+            components, hooks, state management, API integration, and building production-ready SPAs.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>1–3 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">React</span><span class="tech-tag">Redux</span><span
+              class="tech-tag">REST APIs</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fab fa-python"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">Django Backend Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">Deep-dive into Django —
+            models, views, DRF, authentication, Celery, and deploying production applications.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>1–3 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">Django</span><span class="tech-tag">Python</span><span
+              class="tech-tag">PostgreSQL</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fas fa-mobile-alt"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">Mobile App Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">Build cross-platform
+            mobile apps with React Native — navigation, state management, and native device features.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>2–3 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">React Native</span><span class="tech-tag">Expo</span><span
+              class="tech-tag">Firebase</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fas fa-paint-brush"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">UI/UX Design Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">Learn Figma, user
+            research, wireframing, prototyping, and design systems used in professional product teams.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>1–2 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">Figma</span><span class="tech-tag">Adobe XD</span><span
+              class="tech-tag">Prototyping</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="intern-card">
+          <div class="svc-icon mb-3"><i class="fas fa-layer-group"></i></div>
+          <h5 style="color:var(--white);margin-bottom:.6rem">Full Stack Internship</h5>
+          <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1rem;line-height:1.7">The complete package —
+            Django backend, React frontend, database design, API integration, and deployment.</p>
+          <div class="intern-meta mb-3"><span><i class="fas fa-clock"></i>3–6 Months</span><span><i
+                class="fas fa-rupee-sign"></i>Performance Based</span></div>
+          <div class="mb-3"><span class="tech-tag">Django</span><span class="tech-tag">React</span><span
+              class="tech-tag">Full Stack</span></div><a href="{% url 'internship_apply' %}" class="btn-nebula"
+            style="padding:.55rem 1.3rem;font-size:.82rem"><i class="fas fa-paper-plane"></i>Apply Now</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section
+  style="padding:4rem 0;background:linear-gradient(135deg,rgba(0,87,255,.1),rgba(123,97,255,.06));border-top:1px solid rgba(0,87,255,.1)">
+  <div class="container text-center reveal">
+    <h2 class="section-title">Ready to <span>Apply?</span></h2>
+    <p class="section-subtitle">Fill in the contact form and mention your preferred internship track.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="{% url 'internship_apply' %}" class="btn-nebula"><i class="fas fa-paper-plane"></i>Apply Now</a>
+      <a href="https://wa.me/919952315483?text=Hello!%20I'm%20interested%20in%20the%20internship%20program."
+        target="_blank" class="btn-outline-nebula"><i class="fab fa-whatsapp"></i>WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
