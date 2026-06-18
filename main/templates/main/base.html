@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.2">
   {% block extra_head %}{% endblock %}
 </head>
 
@@ -30,7 +30,10 @@
 
       <a class="navbar-brand" href="{% url 'home' %}">
         <img src="{% static 'images/logo.png' %}" alt="Nebula Geo Technologies" class="navbar-logo">
-        <span class="brand-text">Nebula Geo Technologies</span>
+        <div class="brand-text-container">
+          <span class="brand-text-line1">Nebula Geo</span>
+          <span class="brand-text-line2">Technologies</span>
+        </div>
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
