@@ -117,7 +117,32 @@ img {
   flex-shrink: 0;
 }
 
-/* brand-text removed to avoid duplicate company name; logo image used instead */
+/* brand-text styled in gold gradient near the logo */
+.brand-text {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #FFE066 0%, #F5B041 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+@media (max-width: 1199.98px) {
+  .brand-text {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-text {
+    display: none;
+  }
+}
 
 .navbar-logo {
   height: 95px;

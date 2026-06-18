@@ -88,7 +88,7 @@ img {
   background: rgba(3, 11, 26, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 87, 255, 0.15);
-  padding: 0.4rem 0;
+  padding: 0.2rem 0;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -103,7 +103,7 @@ img {
 }
 
 .navbar.scrolled {
-  padding: .4rem 0;
+  padding: .2rem 0;
   box-shadow: 0 4px 20px rgba(0, 0, 0, .5)
 }
 
@@ -117,8 +117,35 @@ img {
   flex-shrink: 0;
 }
 
+/* brand-text styled in gold gradient near the logo */
+.brand-text {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #FFE066 0%, #F5B041 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+@media (max-width: 1199.98px) {
+  .brand-text {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-text {
+    display: none;
+  }
+}
+
 .navbar-logo {
-  height: 52px;
+  height: 95px;
   width: auto;
   display: block;
   flex-shrink: 0;
@@ -126,7 +153,8 @@ img {
 
 @media (max-width: 991px) {
   .navbar-logo {
-    height: 48px;
+   height: 70px !important;
+    width: auto !important;
   }
 }
 
@@ -223,11 +251,11 @@ img {
   }
 
   .brand-name {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 
   .navbar-logo {
-    height: 36px;
+    height: 48px;
     width: auto;
   }
 }
@@ -400,6 +428,42 @@ img {
   position: relative;
   z-index: 2;
   text-align: left;
+  padding-right: 60px;
+}
+
+.hero-title {
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  color: #ffffff !important;
+}
+
+.hero-title span {
+  color: #00D4FF !important;
+  background: none !important;
+  -webkit-text-fill-color: #00D4FF !important;
+  text-shadow: none !important;
+}
+
+.hero-description {
+  max-width: 500px !important;
+}
+
+.code-window {
+  max-width: 500px !important;
+  transform: scale(1) !important;
+}
+
+.hero-title span {
+  display: inline-block;
+  font-size: clamp(2.8rem, 4vw, 5rem);
+  color: var(--accent-highlight) !important;
+  background: var(--accent-highlight-bg) !important;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.65rem;
+  line-height: 1.15 !important;
+  vertical-align: middle;
+  box-decoration-break: clone;
 }
 
 .hero-badge {
@@ -419,26 +483,6 @@ img {
   animation: fiu .6s ease both;
 }
 
-.hero-title {
-  font-size: clamp(3rem, 5vw, 5rem);
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -1px;
-  color: #ffffff !important;
-  margin-bottom: 1.2rem;
-}
-
-.hero-title span {
-  display: inline-block;
-  color: var(--accent-highlight) !important;
-  background: var(--accent-highlight-bg) !important;
-  padding: 0.12rem 0.45rem;
-  border-radius: 0.65rem;
-  line-height: 1.1;
-  vertical-align: middle;
-  box-decoration-break: clone;
-}
-
 .hero-description {
   font-size: 1rem;
   color: var(--text-muted);
@@ -450,6 +494,7 @@ img {
 .hero-visual {
   display: flex;
   justify-content: center;
+  padding-left: 40px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -530,6 +575,8 @@ img {
 .code-window {
   width: 100%;
   background: #01050F;
+  max-width: 650px;
+  margin-left: auto;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(0, 87, 255, .15)

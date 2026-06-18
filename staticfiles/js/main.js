@@ -48,35 +48,27 @@ const counterObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
 
 // Contact form AJAX
+
+
 const contactForm = document.getElementById('contactForm');
+
 if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = contactForm.querySelector('button[type="submit"]');
-    const msgDiv = document.getElementById('formMsg');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-    btn.disabled = true;
-    try {
-      const fd = new FormData(contactForm);
-      const res = await fetch(contactForm.action || window.location.href, {
-        method: 'POST',
-        body: fd,
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      });
-      const data = await res.json();
-      if (data.success) {
-        msgDiv.innerHTML = `<div class="alert-nebula"><i class="fas fa-check-circle"></i>${data.message}</div>`;
-        contactForm.reset();
-      } else {
-        msgDiv.innerHTML = `<div class="alert-nebula alert-nebula-err"><i class="fas fa-exclamation-circle"></i>${data.message}</div>`;
-      }
-    } catch {
-      msgDiv.innerHTML = `<div class="alert-nebula alert-nebula-err"><i class="fas fa-exclamation-circle"></i>Something went wrong. Please try again.</div>`;
-    }
-    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
-    btn.disabled = false;
-    setTimeout(() => { msgDiv.innerHTML = ''; }, 6000);
-  });
+    contactForm.addEventListener('submit', function () {
+
+        const btn = contactForm.querySelector('button[type="submit"]');
+
+        btn.innerHTML =
+            '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+
+        btn.disabled = true;
+
+        setTimeout(() => {
+            btn.innerHTML =
+                '<i class="fas fa-check-circle me-2"></i> Message Sent';
+
+            btn.disabled = false;
+        }, 2000);
+    });
 }
 
 // Portfolio filter

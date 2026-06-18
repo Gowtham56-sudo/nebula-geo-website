@@ -1,0 +1,14 @@
+# Git Ignore
+db.sqlite3
+firebase-key.json
+*-adminsdk-*.json
+*.pyc
+__pycache__/
+venv/
+.venv/
+staticfiles/
+media/
+.DS_Store
+.env
+.idea/
+.vscode/

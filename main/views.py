@@ -5,14 +5,13 @@ from django.contrib import messages
 
 from django.http import JsonResponse
 from django.core.mail import send_mail
-from .models import Service, PortfolioProject, InternshipProgram, ContactMessage, InternshipApplication, TeamMember, Testimonial
+from .models import PortfolioProject  # For CATEGORY_CHOICES
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ContactSerializer
 
-
-
+from . import firebase_service
 
 
 @api_view(['POST'])
@@ -20,7 +19,8 @@ def contact_api(request):
     serializer = ContactSerializer(data=request.data)
 
     if serializer.is_valid():
-        serializer.save()
+        # Save to Firebase
+        firebase_service.create_contact_message(dict(serializer.validated_data))
 
         send_mail(
             subject=f"New Contact Form: {serializer.validated_data['subject']}",
@@ -45,9 +45,9 @@ Message:
     return Response(serializer.errors, status=400)
 
 def home(request):
-    services = Service.objects.filter(is_active=True)[:6]
-    projects = PortfolioProject.objects.filter(is_featured=True)[:4]
-    testimonials = Testimonial.objects.filter(is_active=True)[:4]
+    services = firebase_service.get_active_services(limit=6)
+    projects = firebase_service.get_featured_projects(limit=4)
+    testimonials = firebase_service.get_active_testimonials(limit=4)
     stats = {
         'projects': 50,
         'clients': 30,
@@ -63,13 +63,13 @@ def home(request):
 
 
 def about(request):
-    team = TeamMember.objects.filter(is_active=True)
+    team = firebase_service.get_active_team_members()
     return render(request, 'main/about.html', {'team': team})
 
 
 def services(request):
-    services_list = Service.objects.filter(is_active=True)
-    internships = InternshipProgram.objects.filter(is_active=True)
+    services_list = firebase_service.get_all_services()
+    internships = firebase_service.get_active_internship_programs()
     return render(request, 'main/services.html', {
         'services': services_list,
         'internships': internships,
@@ -78,9 +78,7 @@ def services(request):
 
 def portfolio(request):
     category = request.GET.get('category', 'all')
-    projects = PortfolioProject.objects.all()
-    if category != 'all':
-        projects = projects.filter(category=category)
+    projects = firebase_service.get_all_projects(category=category)
     categories = PortfolioProject.CATEGORY_CHOICES
     return render(request, 'main/portfolio.html', {
         'projects': projects,
@@ -90,7 +88,7 @@ def portfolio(request):
 
 
 def internship(request):
-    programs = InternshipProgram.objects.filter(is_active=True)
+    programs = firebase_service.get_active_internship_programs()
     return render(
         request,
         'main/internship.html',
@@ -98,12 +96,8 @@ def internship(request):
     )
 
 
-
-
 def internship_apply(request):
-
     if request.method == "POST":
-
         name = request.POST.get("name")
         email = request.POST.get("email")
         phone = request.POST.get("phone")
@@ -114,17 +108,17 @@ def internship_apply(request):
         skills = request.POST.get("skills")
         message = request.POST.get("message")
 
-        InternshipApplication.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            college=college,
-            department=department,
-            year=year,
-            internship_program=internship_program,
-            skills=skills,
-            message=message,
-        )
+        firebase_service.create_internship_application({
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'college': college,
+            'department': department,
+            'year': year,
+            'internship_program': internship_program,
+            'skills': skills,
+            'message': message,
+        })
 
         try:
             send_mail(
@@ -171,15 +165,15 @@ def contact(request):
         if name and email and subject and message:
             ip = request.META.get("REMOTE_ADDR")
 
-            ContactMessage.objects.create(
-                name=name,
-                email=email,
-                phone=phone,
-                subject=subject,
-                message=message,
-                service_interested=service_interested,
-                ip_address=ip,
-            )
+            firebase_service.create_contact_message({
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'subject': subject,
+                'message': message,
+                'service_interested': service_interested,
+                'ip_address': ip,
+            })
 
             messages.success(
                 request,
@@ -195,7 +189,7 @@ def contact(request):
 
         return redirect("contact")
 
-    services_list = Service.objects.filter(is_active=True)
+    services_list = firebase_service.get_active_services()
     return render(
         request,
         'main/contact.html',
@@ -209,3 +203,4 @@ def privacy_policy(request):
 
 def terms(request):
     return render(request, 'main/terms.html')
+
